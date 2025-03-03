@@ -1,0 +1,15 @@
+tr:hover {
+    background-color: lightslategrey;
+    scale: 1.02;
+    transition: 0.2s;
+}
+td{
+    padding: 3px;
+}
+.contner{
+    width: 900px;
+    margin: 0 auto;
+}
+.details{
+    width: 30px;
+}
