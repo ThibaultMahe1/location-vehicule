@@ -1,23 +1,8 @@
 <?php
 session_start();
+include("header.php");
 include("liaisonPHP-SQL.php");
-$connection=0;
-$sql='SELECT * FROM user';
-$temp = $pdo->query($sql);
-while($resultats=$temp->fetch()){
-    if(isset($_POST["identifiant"])){
-    if($resultats["name"]==$_POST["identifiant"] && $resultats["mdp"]==$_POST["mdp"]){
-        $connection=1;
-        $_SESSION["valide"]=1;
-        $_SESSION["connection"]=$resultats["name"];
-        if($resultats["admin"]==1){
-            $_SESSION["admin"]=1;
-        }else{
-            $_SESSION["admin"]=0;
-        }
-    }
-}
-}
+include("back_connection.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +15,7 @@ while($resultats=$temp->fetch()){
 </head>
 <body>
     <body>
+        <div class="contner connection">
         <?php
         if($connection==0){
             echo '<form action="" method="post">
@@ -37,15 +23,16 @@ while($resultats=$temp->fetch()){
                     <input type="text" id="identifiant" name="identifiant">
                     <label for="mdp">mots de passe</label>
                     <input type="password" id="mdp" name="mdp">
-                    <input type="submit" value="log in">
+                    <input type="submit" value="log in" class="bouton">
                 </form>';
 
             
 
         }else if($connection==1){
-            echo '<a href="acceuil">acceder au site</a>';
+            header('Location: acceuil.php');
         }
-            ?>
+        ?>
+        </div>
     </body>
     <script src="script.js"></script>
 </body>

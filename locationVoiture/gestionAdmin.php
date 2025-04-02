@@ -1,11 +1,12 @@
 <?php
 session_start();
+include("header.php");
 include("liaisonPHP-SQL.php");
 if($_GET["type"]=="modifier"){
     $type="modifier";
     $id = $_GET["id"];
     $_SESSION["id"]=$id;
-    if($_SESSION["admin"]==1){
+    if($_SESSION["admin"]==1){  
         $sql='SELECT * FROM voiture WHERE id='.$id;
         $temp = $pdo->query($sql);
         $resultats=$temp->fetch();
