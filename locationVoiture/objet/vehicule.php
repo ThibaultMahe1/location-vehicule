@@ -1,5 +1,5 @@
 <?php
-require("Bdd.php");
+require_once("Bdd.php");
 class Vehicule extends Bdd{
     public $id;
     public $marque;
@@ -7,6 +7,8 @@ class Vehicule extends Bdd{
     public $immatriculation;
     public $statut;
     public $prix;
+    public $reservation;
+    
 
     public function __construct(array $row = []) 
     {
@@ -16,6 +18,8 @@ class Vehicule extends Bdd{
         $this->immatriculation = $row["immatriculation"] ?? null;
         $this->statut = $row["statut"] ?? null;
         $this->prix = $row["prix"] ?? null;
+        $this->reservation = $row["reservation"] ?? null;
+        
     }
     
 public static function all()

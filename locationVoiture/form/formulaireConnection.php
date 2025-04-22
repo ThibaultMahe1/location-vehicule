@@ -1,24 +1,18 @@
 <?php
 session_start();
-include("header.php");
-include("liaisonPHP-SQL.php");
-include("back_connection.php");
+$_SESSION["co"]=0;
+require_once("../objet/Commande.php");
+require_once("../image_et_style/header.php");
+require_once("../back/commande_sql_admin.php");
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <meta name="description" content="">
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
     <body>
         <div class="contner connection">
         <?php
-        if($connection==0){
+        if($_SESSION["co"]==0){
             echo '<form action="" method="post">
+            
+                    <input type="hidden" name="type" value="connection">
                     <label for="identifiant">identifiant</label>
                     <input type="text" id="identifiant" name="identifiant">
                     <label for="mdp">mots de passe</label>
@@ -28,12 +22,11 @@ include("back_connection.php");
 
             
 
-        }else if($connection==1){
-            header('Location: acceuil.php');
+        }else if($_SESSION["co"]==1){
+            header('Location: ../index.php');
         }
         ?>
         </div>
     </body>
-    <script src="script.js"></script>
 </body>
 </html>

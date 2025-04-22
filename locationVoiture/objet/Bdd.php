@@ -1,5 +1,4 @@
 <?php
-
 class Bdd{
     private $host;
     private $db ;
@@ -31,23 +30,6 @@ class Bdd{
         }   
         return $pdo;
     }
-    public function commande($type, array $parametres){
-        $pdo = Bdd::PDO();
-        if ($type==="ajouter"){
-            $sql = 'INSERT INTO voiture(id, marque, modele, immatriculation, statut, prix) VALUE (" auto "';
-            foreach ($parametres as $parametre) {
-                $sql=$sql.', "'.$parametre.'"';
-            }
-            $sql =$sql.')';
-        
-        }elseif ($type==="modifier"){
-            $sql ='UPDATE voiture SET marque = "'.$parametres[0].'", modele ="'.$parametres[1].'", immatriculation ="'.$parametres[2].'", statut ="'.$parametres[3].'", prix ="'.$parametres[4].'" WHERE id='.$_SESSION["id"];             
-        }elseif ($type==="supprimer"){
-            $sql = 'DELETE FROM `voiture` WHERE id='.$parametres[0];
-        }
-        $pdo->exec($sql);
-    }
-
 
 }
 

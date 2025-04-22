@@ -1,22 +1,25 @@
 <?php
 session_start();
-include("header.php");
-include("liaisonPHP-SQL.php");
+require("../objet/vehicule.php");
+require_once("../image_et_style/header.php");
 if($_GET["type"]=="modifier"){
     $type="modifier";
     $id = $_GET["id"];
     $_SESSION["id"]=$id;
     if($_SESSION["admin"]==1){  
-        $sql='SELECT * FROM voiture WHERE id='.$id;
-        $temp = $pdo->query($sql);
-        $resultats=$temp->fetch();
-        $marque=$resultats["marque"];
-        $modele=$resultats["modele"];
-        $immatriculation=$resultats["immatriculation"];
-        $statut=$resultats["statut"];
-        $prix=$resultats["prix"];
-    }
+        $vehicules = Vehicule::all();
+        foreach($vehicules as $vehicule){
+            if($vehicule->id==$id){
+                $marque=$vehicule->marque;
+                $modele=$vehicule->modele;
+                $immatriculation=$vehicule->immatriculation;
+                $statut=$vehicule->statut;
+                $prix=$vehicule->prix;
 
+            }
+
+        }
+    }
 }else if($_GET["type"]=="ajouter"){
     $type="ajouter";
     if($_SESSION["admin"]==1){
@@ -30,17 +33,9 @@ if($_GET["type"]=="modifier"){
 
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <meta name="description" content="">
-    <link rel="stylesheet" href="style.css">
-</head>
+
 <body>
-    <form action="acceuil.php" method="post">
+    <form action="../index.php" method="post">
     <?php
     if($_SESSION["admin"]==1){
         echo '
@@ -58,7 +53,7 @@ if($_GET["type"]=="modifier"){
         echo    '>rupture de stock</option>
         </select>
         <label for="">prix</label>
-        <input type="text" name="prix" value="'.$prix.'">
+        <input type="number" step="0.01" name="prix" value="'.$prix.'">
         <input type="submit" name="type" value="'.$type.'">';
     }
     ?>
@@ -67,7 +62,6 @@ if($_GET["type"]=="modifier"){
     </form>
 
 
-    <a href="acceuil.php">retour</a>
-    <script src="script.js"></script>
+    <a href="../index.php">retour</a>
 </body>
 </html>
